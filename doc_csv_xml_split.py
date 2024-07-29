@@ -7,6 +7,8 @@ from pathlib import Path
 from typing import Any
 from typing import Union
 
+__version__: str = "0.1.0"
+
 
 def main() -> None:
     """Main function."""
@@ -38,8 +40,14 @@ def split_xml_file(input_file: Path, xml_string_column: str = "Data") -> None:
 
 def parse_args() -> argparse.Namespace:
     """Parse command line arguments."""
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description=f"%(prog)s {__version__}\n{__doc__}",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
     parser.add_argument("input_file", help="Path to input file.")
+    parser.add_argument(
+        "-v", "--version", action="version", version=f"%(prog)s v{__version__}"
+    )
     return parser.parse_args()
 
 
